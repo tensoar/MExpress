@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<litepal>
+    <dbname value="Express"/>
+    <version value="1" />
+    <list>
+        <mapping class="top.wteng.wtexpress.entity.ExpressRecorder" />
+    </list>
+</litepal>
