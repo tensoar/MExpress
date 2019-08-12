@@ -1,4 +1,4 @@
-package top.wteng.wtexpress.activity
+package top.wteng.mexpress.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,10 +14,9 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.*
 import org.litepal.LitePal
-import top.wteng.wtexpress.R
-import top.wteng.wtexpress.adapter.ExpressAdapter
-import top.wteng.wtexpress.entity.ExpressRecorder
-import top.wteng.wtexpress.util.ExpressApiResultParser
+import top.wteng.mexpress.R
+import top.wteng.mexpress.adapter.ExpressAdapter
+import top.wteng.mexpress.entity.ExpressRecorder
 
 class MainActivity : AppCompatActivity() {
     private val expressCompany = mapOf("京东" to "JD", "安能" to "ANE", "承诺达" to "CND", "百世" to "HTKY", "申通" to "STO")

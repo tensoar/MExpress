@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="top.wteng.wtexpress">
+          package="top.wteng.mexpress">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -15,10 +15,10 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ExpressActivity">
+        <activity android:name="top.wteng.mexpress.activity.ExpressActivity">
         </activity>
         <activity
-                android:name=".activity.MainActivity"
+                android:name="top.wteng.mexpress.activity.MainActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -1,7 +1,6 @@
-package top.wteng.wtexpress.adapter
+package top.wteng.mexpress.adapter
 
 //import android.support.v7.widget.RecyclerView
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
@@ -9,11 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.express_item.view.*
-import top.wteng.wtexpress.R
-import top.wteng.wtexpress.activity.ExpressActivity
-import top.wteng.wtexpress.entity.ExpressRecorder
-import android.support.v7.widget.RecyclerView.Adapter as Adapter1
+import top.wteng.mexpress.R
+import top.wteng.mexpress.activity.ExpressActivity
+import top.wteng.mexpress.entity.ExpressRecorder
 
 class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): RecyclerView.Adapter<ExpressViewHolder>() {
     private var mContext: Context? = null

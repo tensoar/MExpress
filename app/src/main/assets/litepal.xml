@@ -3,6 +3,6 @@
     <dbname value="Express"/>
     <version value="1" />
     <list>
-        <mapping class="top.wteng.wtexpress.entity.ExpressRecorder" />
+        <mapping class="top.wteng.mexpress.entity.ExpressRecorder" />
     </list>
 </litepal>

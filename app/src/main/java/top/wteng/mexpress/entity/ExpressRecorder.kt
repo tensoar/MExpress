@@ -1,4 +1,4 @@
-package top.wteng.wtexpress.entity
+package top.wteng.mexpress.entity
 
 import org.litepal.annotation.Column
 import org.litepal.crud.LitePalSupport
