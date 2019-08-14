@@ -2,6 +2,8 @@ package top.wteng.mexpress.adapter
 
 import de.hdodenhof.circleimageview.CircleImageView
 import android.content.Context
+import android.graphics.Color
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +32,7 @@ class ExpressTraceAdpter(private val expressTraceList: MutableList<MutableMap<St
         holder.expressTimeView.text = oneExpressTrace["acceptTime"]
         if (position == 0){
             holder.smallImgView.setImageResource(R.drawable.plan_small)
+            holder.expressContentView.setTextColor(Color.parseColor("#FF0000"))
         }
     }
 

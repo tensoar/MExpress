@@ -5,6 +5,9 @@ import org.litepal.crud.LitePalSupport
 
 data class ExpressRecorder(
     @Column(unique = true)
+    var id: Long = 0,
+
+    @Column(unique = true)
     var number: String,
     var note: String = "",
     var company: String = "",

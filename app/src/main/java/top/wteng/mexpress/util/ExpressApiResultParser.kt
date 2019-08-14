@@ -39,6 +39,7 @@ object ExpressApiResultParser {
                                 "acceptStation" to curTraceObj.optString("AcceptStation", "")))
         }
 //        fullTraceArr.
+        fullTrace.reverse()
         return fullTrace
     }
 }

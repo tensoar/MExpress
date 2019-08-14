@@ -3,11 +3,14 @@ package top.wteng.mexpress.adapter
 //import android.support.v7.widget.RecyclerView
 import android.content.Context
 import android.content.Intent
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import org.litepal.LitePal
 import top.wteng.mexpress.R
 import top.wteng.mexpress.activity.ExpressActivity
 import top.wteng.mexpress.entity.ExpressRecorder
@@ -21,6 +24,7 @@ class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): Rec
         }
         val view = LayoutInflater.from(mContext).inflate(R.layout.express_item, parent, false)
         val holder =  ExpressViewHolder(view)
+
         holder.itemView.setOnClickListener { v ->
             val position = holder.adapterPosition
             val curExpress = expressList[position]
@@ -32,6 +36,29 @@ class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): Rec
             }
             mContext?.startActivity(intent)
         }
+        holder.itemView.setOnLongClickListener { v ->
+            val position = holder.adapterPosition
+            val curExpress = expressList[position]
+            val alertDialog = mContext?.let { content ->
+                AlertDialog.Builder(content).also {dialog ->
+                    dialog.setMessage("删除此订单?")
+                    dialog.setPositiveButton("删除") { d, _ ->
+                        LitePal.delete(ExpressRecorder::class.java, curExpress.id)
+                        expressList.removeAt(position)
+                        d.cancel()
+                        notifyDataSetChanged()
+                        Toast.makeText(content, "订单 ${curExpress.number} 已删除", Toast.LENGTH_SHORT).show()
+                    }
+                    dialog.setNegativeButton("取消") { d, _ ->
+                        d.cancel()
+                        Toast.makeText(content, "已取消", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            alertDialog?.show()
+            return@setOnLongClickListener true
+        }
+
         return holder
     }
 

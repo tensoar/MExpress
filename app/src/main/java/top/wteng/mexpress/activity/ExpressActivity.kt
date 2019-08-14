@@ -1,5 +1,6 @@
 package top.wteng.mexpress.activity
 
+import android.graphics.Color
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -35,6 +36,7 @@ class ExpressActivity : AppCompatActivity() {
                 "" -> expCompanyName
                 else -> expNote
             }
+            it.setExpandedTitleColor(Color.RED)
         }
         var expressImage = findViewById<ImageView>(R.id.express_toolbar_image).also {
             it.setImageResource(R.drawable.plan)
@@ -68,9 +70,6 @@ class ExpressActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: String): MutableMap<String, Any> {
             Log.d("task", "expCode = ${params[0]}, expNo = ${params[1]}")
-            for(i in (0 until 1000)) {
-                publishProgress(i)
-            }
             val expressTrace = OrderTraceUtil.getTraceMap(params[0], params[1])
             return expressTrace
         }
