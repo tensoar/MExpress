@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import top.wteng.mexpress.R
+import top.wteng.mexpress.activity.R
+
+//import top.wteng.mexpress.R
 
 class ExpressTraceAdpter(private val expressTraceList: MutableList<MutableMap<String, String>>): RecyclerView.Adapter<ExpressTraceViewHolder>() {
     private var mContext: Context? = null

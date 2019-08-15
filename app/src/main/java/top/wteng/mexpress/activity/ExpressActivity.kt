@@ -12,7 +12,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import top.wteng.mexpress.R
+//import top.wteng.mexpress.R
 import top.wteng.mexpress.adapter.ExpressTraceAdpter
 import top.wteng.mexpress.util.OrderTraceUtil
 

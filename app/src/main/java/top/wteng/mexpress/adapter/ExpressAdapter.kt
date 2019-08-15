@@ -11,8 +11,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import org.litepal.LitePal
-import top.wteng.mexpress.R
+//import top.wteng.mexpress.R
 import top.wteng.mexpress.activity.ExpressActivity
+import top.wteng.mexpress.activity.R
 import top.wteng.mexpress.entity.ExpressRecorder
 
 class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): RecyclerView.Adapter<ExpressViewHolder>() {
