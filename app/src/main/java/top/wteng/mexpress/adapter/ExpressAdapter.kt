@@ -34,6 +34,7 @@ class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): Rec
                 it.putExtra("expCompanyName", curExpress.company)
                 it.putExtra("expNo", curExpress.number)
                 it.putExtra("expNote", curExpress.note)
+                it.putExtra("expId", curExpress.id)
             }
             mContext?.startActivity(intent)
         }
@@ -69,7 +70,10 @@ class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): Rec
 
     override fun onBindViewHolder(holder: ExpressViewHolder, position: Int) {
         val expressRecorder = expressList.get(position)
-        holder.expressItemTitleView.text = expressRecorder.company
+        holder.expressItemTitleView.text = when(expressRecorder.note) {
+            "" -> expressRecorder.company
+            else -> expressRecorder.note
+        }
         holder.expressItemStatusView.text = expressRecorder.number
         holder.expressItemInfoViw.text = "详情 >"
     }

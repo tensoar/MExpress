@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
@@ -14,6 +15,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import org.litepal.LitePal
@@ -72,7 +74,8 @@ class MainActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu)
+//            actionBar.setHomeButtonEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.mipmap.ic_menu)
         }
 
         //侧边栏
@@ -96,6 +99,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> drawerLayout.openDrawer(GravityCompat.START)
+        }
+        return true
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.tool_bar_menu, menu)
@@ -116,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         allExpress.clear()
         val expresses = when(all){
             true -> LitePal.findAll(ExpressRecorder::class.java)
-            else -> LitePal.where("status <= ?", "2").find(ExpressRecorder::class.java)
+            else -> LitePal.where("state <= ?", "2").find(ExpressRecorder::class.java)
         }.also { it.reverse() }
         allExpress.addAll(expresses)
     }
@@ -141,11 +150,14 @@ class MainActivity : AppCompatActivity() {
                 val expressCompanySelected: String = spinner.selectedItem.toString()
                 val newExpressRecorder = expressCompany[expressCompanySelected]?.let { expCode ->
                     ExpressRecorder(number = number, note = note, company = expressCompanySelected,
-                        companyCode = expCode
+                        companyCode = expCode, state = 0, lastTime = "", lastTrace = "暂无轨迹",
+                        fullTrace = """
+                            [{"acceptTime": "", "acceptStation": "暂无轨迹"}]
+                        """.trimIndent()
                     )
                 }
                 val expressFound = LitePal.select("*").where("number = ?", number).find(ExpressRecorder::class.java)
-                println(expressFound)
+//                println(expressFound)
                 if (expressFound.isEmpty()) {
                     // 添加新订单
                     newExpressRecorder!!.save()
