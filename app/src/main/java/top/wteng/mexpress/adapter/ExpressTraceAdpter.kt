@@ -3,7 +3,6 @@ package top.wteng.mexpress.adapter
 import de.hdodenhof.circleimageview.CircleImageView
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +21,7 @@ class ExpressTraceAdpter(private val expressTrace: List<TraceResultItem>): Recyc
         if (mContext == null) {
             mContext = parent.context
         }
-        val view = LayoutInflater.from(mContext).inflate(R.layout.express_info_item, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.express_trace_item, parent, false)
         return ExpressTraceViewHolder(view)
     }
 

@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="spinner" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <!--设置分割线-->
+        <item name="android:dropDownListViewStyle">@style/spinnerListStyle</item>
+        <!--设置字体颜色及大小-->
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="spinnerListStyle" parent="@android:style/Widget.ListView.DropDown">
+        <item name="android:dividerHeight">1dp</item>
+
+        <!-- item按下效果 -->
+        <item name="android:listSelector">@android:color/holo_red_light</item>
+    </style>
+
 </resources>

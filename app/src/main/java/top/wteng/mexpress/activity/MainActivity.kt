@@ -22,11 +22,10 @@ import org.litepal.LitePal
 //import top.wteng.mexpress.R
 import top.wteng.mexpress.adapter.ExpressAdapter
 import top.wteng.mexpress.entity.ExpressRecorder
+import top.wteng.mexpress.entity.SupportedCompany
 
 class MainActivity : AppCompatActivity() {
-    private val expressCompany = mapOf("京东快递" to "JD", "百世快递" to "HTKY", "申通快递" to "STO", "安能快递" to "ANE",
-        "承诺达" to "CND", "中通快递" to "ZTO", "韵达快递" to "YD", "圆通速递" to "YTO", "天天快递" to "HHTT",
-        "顺丰速运" to "SF", "EMS" to "EMS", "京东快运" to "JDKY")
+    private val expressCompany = SupportedCompany.companyMap
     private lateinit var recyclerView: RecyclerView
     private var allExpress = mutableListOf<ExpressRecorder>()
     private lateinit var expressAdapter: ExpressAdapter
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
-    private var refreshAll = false
+    private var allExpressFlag = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         //设置列表
         recyclerView =  findViewById(R.id.recycle_view)
-        initExpress(all = false)
+        initExpress(allExpressFlag = allExpressFlag)
         expressAdapter = ExpressAdapter(allExpress)
         with(recyclerView) {
             this.layoutManager = GridLayoutManager(this@MainActivity, 1)
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         with(refreshView) {
             this.setColorSchemeResources(R.color.colorPrimary)
             this.setOnRefreshListener {
-                refresh(refreshAll)
+                refresh(allExpressFlag)
             }
         }
 
@@ -80,17 +79,17 @@ class MainActivity : AppCompatActivity() {
 
         //侧边栏
         navView = findViewById(R.id.nav_view)
-        navView.setCheckedItem(R.id.on_the_way)
+        navView.setCheckedItem(R.id.all_express)
         navView.setNavigationItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.all_express -> {
-                    refreshAll = true
-                    initExpress(all = true)
+                    allExpressFlag = true
+                    initExpress(allExpressFlag = allExpressFlag)
                     expressAdapter.notifyDataSetChanged()
                 }
                 R.id.on_the_way -> {
-                    refreshAll = false
-                    initExpress(all = false)
+                    allExpressFlag = false
+                    initExpress(allExpressFlag = allExpressFlag)
                     expressAdapter.notifyDataSetChanged()
                 }
             }
@@ -111,8 +110,8 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun refresh(all: Boolean) {
-        initExpress(all)
+    private fun refresh(allExpressFlag: Boolean) {
+        initExpress(allExpressFlag)
         if (!refreshView.isRefreshing){
             refreshView.isRefreshing = true
         }
@@ -121,9 +120,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun initExpress(all: Boolean){
+    private fun initExpress(allExpressFlag: Boolean){
         allExpress.clear()
-        val expresses = when(all){
+        val expresses = when(allExpressFlag){
             true -> LitePal.findAll(ExpressRecorder::class.java)
             else -> LitePal.where("state <= ?", "2").find(ExpressRecorder::class.java)
         }.also { it.reverse() }
@@ -137,6 +136,8 @@ class MainActivity : AppCompatActivity() {
         val spinnerAdapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, expressCompany.keys.toMutableList())
         val spinner = addExpressView.findViewById<AppCompatSpinner>(R.id.express_company).also {
             it.adapter = spinnerAdapter
+            it.setPadding(5, 5,5,5)
+            it.dropDownHorizontalOffset = -10
         }
 
         val dialogBuilder = AlertDialog.Builder(this).also {
@@ -165,7 +166,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, "已撤销添加", Toast.LENGTH_SHORT).show()
                     }.show()
                     dialog.cancel()
-                    refresh(refreshAll)
+                    refresh(allExpressFlag)
                 }else {
                     Snackbar.make(v, "订单号 $number 已存在，无需重复添加", Snackbar.LENGTH_SHORT).setAction("") {
                         Toast.makeText(this@MainActivity, "已撤销添加", Toast.LENGTH_SHORT).show()

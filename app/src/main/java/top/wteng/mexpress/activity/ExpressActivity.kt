@@ -21,7 +21,7 @@ import top.wteng.mexpress.util.ExpressApiResultParser
 import top.wteng.mexpress.util.OrderTraceUtil
 
 class ExpressActivity : AppCompatActivity() {
-    lateinit var expressTraceView: RecyclerView
+    private lateinit var expressTraceView: RecyclerView
     private val adapterList = mutableListOf<TraceResultItem>()
     private lateinit var expressTraceAdapter: ExpressTraceAdpter
     private var expNo = ""

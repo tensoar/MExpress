@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/add_express_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -8,8 +9,8 @@
     <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp">
+            android:layout_margin="5dp"
+            android:padding="5dp">
         <EditText
                 android:id="@+id/express_number"
                 android:layout_width="match_parent"
@@ -24,8 +25,8 @@
     <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp">
+            android:layout_margin="5dp"
+            android:padding="5dp">
         <EditText
                 android:id="@+id/express_note"
                 android:layout_width="match_parent"
@@ -45,7 +46,10 @@
         <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/express_company"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                tools:ignore="HardcodedText"
+                android:theme="@style/spinner"/>
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MExpress</string>
-    <string name="all_express_menu_title">All</string>
-    <string name="on_the_way_menu_title">OnTheWay</string>
+    <string name="all_express_menu_name">全部快递</string>
+    <string name="on_the_way_menu_name">在途中</string>
+    <string name="settings_menu_name">设置</string>
+    <string name="about_menu_name">关于</string>
 </resources>
