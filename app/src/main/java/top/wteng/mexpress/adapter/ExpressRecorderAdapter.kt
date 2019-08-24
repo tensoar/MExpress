@@ -102,6 +102,8 @@ class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): Rec
         val picId = mContext?.resources?.getIdentifier(logoName,"drawable", mContext?.packageName)
         if (picId!! > 0) {
             holder.expressLogoView.setImageResource(picId)
+        }else {
+            holder.expressLogoView.setImageResource(R.drawable.default_logo)
         }
 
     }
