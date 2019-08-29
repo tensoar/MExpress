@@ -133,7 +133,8 @@ class MainActivity : AppCompatActivity() {
     private fun addExpress(v: View) {
         val addExpressView = layoutInflater.inflate(R.layout.add_express, null)
 
-        val spinnerAdapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, expressCompany.keys.toMutableList())
+//        val spinnerAdapter = ArrayAdapter.createFromResource(this@MainActivity, )
+        val spinnerAdapter = ArrayAdapter(this@MainActivity, R.layout.spinner_item, expressCompany.keys.toMutableList())
         val spinner = addExpressView.findViewById<AppCompatSpinner>(R.id.express_company).also {
             it.adapter = spinnerAdapter
             it.setPadding(5, 5,5,5)

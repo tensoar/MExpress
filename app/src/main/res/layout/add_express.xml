@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
                 tools:ignore="HardcodedText"
-                android:theme="@style/spinner"/>
+                android:prompt="@string/spinner_prompt" />
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

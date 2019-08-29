@@ -4,4 +4,5 @@
     <string name="on_the_way_menu_name">在途中</string>
     <string name="settings_menu_name">设置</string>
     <string name="about_menu_name">关于</string>
+    <string name="spinner_prompt">选择物流公司</string>
 </resources>
