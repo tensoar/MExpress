@@ -1,5 +1,7 @@
 package top.wteng.mexpress.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
@@ -14,6 +16,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.FloatProperty
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.add_express.view.*
@@ -63,6 +66,7 @@ class ExpressActivity : AppCompatActivity() {
 
         //设置工具栏
         setSupportActionBar(expressToolbar)
+        val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         //设置适配器
@@ -121,6 +125,13 @@ class ExpressActivity : AppCompatActivity() {
                             expCompanyName = expressCompanySelected
                             expNote = note
                             expCode = expressCompany[expressCompanySelected]
+
+                            expressColToolBar.title = when (expNote) {
+                                null -> expCompanyName
+                                "" -> expCompanyName
+                                else -> expNote
+                            }
+
                             val express = expressFound[0]
                             express.number = number
                             express.note = note
@@ -168,6 +179,22 @@ class ExpressActivity : AppCompatActivity() {
             println("number = $number")
             newExpressRecorder.updateAll("number = ?", number)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                setResult(RESULT_OK)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        setResult(RESULT_OK)
+        super.onBackPressed()
     }
 
     inner class ExpressTraceTask: AsyncTask<String, Int, MutableMap<String, Any>>() {

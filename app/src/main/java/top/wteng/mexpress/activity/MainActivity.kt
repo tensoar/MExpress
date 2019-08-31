@@ -1,6 +1,8 @@
 package top.wteng.mexpress.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
@@ -108,6 +110,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.tool_bar_menu, menu)
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when(requestCode) {
+            1 -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    refresh(allExpressFlag)
+                }
+            }
+        }
     }
 
     private fun refresh(allExpressFlag: Boolean) {

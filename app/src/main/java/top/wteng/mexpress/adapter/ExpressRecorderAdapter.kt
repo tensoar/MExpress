@@ -2,6 +2,7 @@ package top.wteng.mexpress.adapter
 
 //import android.support.v7.widget.RecyclerView
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -42,7 +43,8 @@ class ExpressAdapter(private val expressList: MutableList<ExpressRecorder>): Rec
                 it.putExtra("expNote", curExpress.note)
                 it.putExtra("expId", curExpress.id)
             }
-            mContext?.startActivity(intent)
+            (mContext!! as Activity).startActivityForResult(intent, 1)
+//            mContext?.startActivity(intent)
         }
         holder.itemView.setOnLongClickListener { v ->
             val position = holder.adapterPosition
