@@ -1,25 +1,32 @@
 package top.wteng.mexpress.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatSpinner
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import org.litepal.LitePal
 //import top.wteng.mexpress.R
 import top.wteng.mexpress.adapter.ExpressAdapter
@@ -37,9 +44,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private var allExpressFlag = true
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //申请权限
+        checkPermission()
 //        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         //设置toolbar菜单
         toolbar = findViewById(R.id.toolbar)
@@ -57,7 +68,8 @@ class MainActivity : AppCompatActivity() {
         initExpress(allExpressFlag = allExpressFlag)
         expressAdapter = ExpressAdapter(allExpress)
         with(recyclerView) {
-            this.layoutManager = GridLayoutManager(this@MainActivity, 1)
+            this.layoutManager =
+                GridLayoutManager(this@MainActivity, 1)
             this.adapter = expressAdapter
         }
 
@@ -120,6 +132,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun refresh(allExpressFlag: Boolean) {
@@ -189,10 +202,29 @@ class MainActivity : AppCompatActivity() {
 
             }
             it.setNegativeButton("取消") {dialog, _ ->
-                Toast.makeText(this@MainActivity, "已取消", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "已取消", Toast.LENGTH_SHORT).show()
                 dialog.cancel()
             }
         }
         dialogBuilder.show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    private fun checkPermission() {
+        val neededPermission = mutableListOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.INTERNET
+        )
+        val noGrantedPermission = mutableListOf<String>()
+        neededPermission.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(this@MainActivity, permission)
+                != PackageManager.PERMISSION_GRANTED) {
+                noGrantedPermission.add(permission)
+            }
+        }
+        if (noGrantedPermission.size > 0) {
+            ActivityCompat.requestPermissions(this, noGrantedPermission.toTypedArray(), 1)
+        }
     }
 }

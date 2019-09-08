@@ -1,35 +1,30 @@
 package top.wteng.mexpress.activity
 
-import android.app.Activity
-import android.content.Intent
+
 import android.graphics.Color
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.AppCompatSpinner
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
-import android.util.FloatProperty
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
-import kotlinx.android.synthetic.main.add_express.view.*
+import kotlinx.android.synthetic.main.activity_express.view.*
 import org.litepal.LitePal
 import org.litepal.extension.find
-//import top.wteng.mexpress.R
 import top.wteng.mexpress.adapter.ExpressTraceAdpter
 import top.wteng.mexpress.entity.ExpressRecorder
 import top.wteng.mexpress.entity.SupportedCompany
 import top.wteng.mexpress.entity.TraceResultItem
 import top.wteng.mexpress.util.ExpressApiResultParser
 import top.wteng.mexpress.util.OrderTraceUtil
-import kotlin.math.exp
 
 class ExpressActivity : AppCompatActivity() {
     private lateinit var expressTraceView: RecyclerView
@@ -44,7 +39,7 @@ class ExpressActivity : AppCompatActivity() {
 
         var expCode = intent.getStringExtra("expCode")
         var expCompanyName = intent.getStringExtra("expCompanyName")
-        expNo = intent.getStringExtra("expNo")
+        expNo = intent.getStringExtra("expNo")!!
         var expNote = intent.getStringExtra("expNote")
 //        expId = intent.getStringExtra("id").toLong()
 
@@ -74,7 +69,8 @@ class ExpressActivity : AppCompatActivity() {
         initAdaptorMap(expNo)
         expressTraceAdapter = ExpressTraceAdpter(adapterList)
         with(expressTraceView) {
-            this.layoutManager = GridLayoutManager(this@ExpressActivity, 1)
+            this.layoutManager =
+                GridLayoutManager(this@ExpressActivity, 1)
             this.adapter = expressTraceAdapter
         }
 
@@ -162,15 +158,11 @@ class ExpressActivity : AppCompatActivity() {
         val curRecorder = LitePal.where("number = ?", expNo).find<ExpressRecorder>()
         val traceList = curRecorder[0].toTraceResultObjList()
         adapterList.clear()
-        println(traceList)
         adapterList.addAll(traceList)
     }
     
     fun updateExpressTraceInfo(trace:  MutableMap<String, Any>, number: String) {
         val expressTrace = trace["fullTrace"] as MutableList<MutableMap<String, String>>
-        println("-----------")
-        println(trace)
-        println(expressTrace)
         if (trace["success"] == true && expressTrace.size > 0) {
             val newExpressRecorder = ExpressRecorder( state = trace["state"].toString().toInt(),
                 fullTrace = trace["fullTraceStr"].toString(),
