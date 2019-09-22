@@ -8,10 +8,10 @@
             android:id="@+id/header_img"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/header_img"
+            android:src="@drawable/header"
             android:layout_centerInParent="true"/>
     <TextView
-            android:id="@+id/email"
+            android:id="@+id/signature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -22,7 +22,7 @@
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/email"
+            android:layout_above="@id/signature"
             android:text="name"
             android:textColor="#FFF"
             android:textSize="14sp"/>

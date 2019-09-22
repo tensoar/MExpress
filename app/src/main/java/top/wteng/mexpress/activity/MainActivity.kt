@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -92,7 +93,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         //侧边栏
+
+        //读取配置
+        val pref = getSharedPreferences("setting", Context.MODE_PRIVATE)
+        val customizeName = pref.getString("name", "MExpress")
+        val customizeSignature = pref.getString("signature", "package tracker demo with kuaidiniao api")
+
         navView = findViewById(R.id.nav_view)
+        navView.getHeaderView(0).also {
+            it.findViewById<TextView>(R.id.username).text = customizeName
+            it.findViewById<TextView>(R.id.signature).text = customizeSignature
+        }
         navView.setCheckedItem(R.id.all_express)
         navView.setNavigationItemSelectedListener { item ->
             when(item.itemId) {
