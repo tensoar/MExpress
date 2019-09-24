@@ -1,5 +1,8 @@
 package top.wteng.mexpress.util;
 
+import android.content.Context;
+import android.content.res.Resources;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,24 +14,34 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.*;
 
+import top.wteng.mexpress.activity.R;
+
 
 public class OrderTraceRequest {
 
+
+    //电商ID
+    private String EBusinessID;
+    //电商加密私钥
+    private String AppKey;
+    //请求url
+    private String ReqURL;
+
     //DEMO
     public static LinkedHashMap<String,String> getOrderTrace(String expCode,String expNo) throws Exception {
+
+        String eBusinessID = Resources.getSystem().getString(R.string.)
+
         OrderTraceRequest orderTraceService=new OrderTraceRequest();
-
         String result=orderTraceService.getOrderTracesByJson(expCode,expNo);
-
         return orderTraceService.handleResult(result);
     }
 
-    //电商ID
-    private String EBusinessID="1267022";
-    //电商加密私钥
-    private String AppKey="303842d9-7501-413f-9c41-a57e21f1ae45";
-    //请求url
-    private String ReqURL="http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx";
+    public OrderTraceRequest(String eBusinessID, String appKey, String reqURL) {
+        this.EBusinessID = eBusinessID;
+        this.AppKey = appKey;
+        this.ReqURL = reqURL;
+    }
 
     /**
      * Json方式 查询订单物流轨迹

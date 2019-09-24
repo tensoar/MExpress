@@ -5,4 +5,8 @@
     <string name="settings_menu_name">设置</string>
     <string name="about_menu_name">关于</string>
     <string name="spinner_prompt">选择物流公司</string>
+
+    <string name="ebusiness_id">111111</string>
+    <string name="app_key">11111111</string>
+    <string name="req_url">http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx</string>
 </resources>

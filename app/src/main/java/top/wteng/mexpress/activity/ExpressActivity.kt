@@ -53,7 +53,7 @@ class ExpressActivity : AppCompatActivity() {
             it.setExpandedTitleColor(Color.RED)
         }
         var expressImage = findViewById<ImageView>(R.id.express_toolbar_image).also {
-            it.setImageResource(R.drawable.plan)
+            it.setImageResource(R.drawable.bak1)
         }
 
         // 设置列表
