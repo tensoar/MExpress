@@ -18,7 +18,7 @@ import top.wteng.mexpress.activity.R;
 
 
 public class OrderTraceRequest {
-
+//    Context context;
 
     //电商ID
     private String EBusinessID;
@@ -28,19 +28,16 @@ public class OrderTraceRequest {
     private String ReqURL;
 
     //DEMO
-    public static LinkedHashMap<String,String> getOrderTrace(String expCode,String expNo) throws Exception {
-
-        String eBusinessID = Resources.getSystem().getString(R.string.)
-
-        OrderTraceRequest orderTraceService=new OrderTraceRequest();
+    public static LinkedHashMap<String,String> getOrderTrace(Context context, String expCode,String expNo) throws Exception {
+        OrderTraceRequest orderTraceService=new OrderTraceRequest(context);
         String result=orderTraceService.getOrderTracesByJson(expCode,expNo);
         return orderTraceService.handleResult(result);
     }
 
-    public OrderTraceRequest(String eBusinessID, String appKey, String reqURL) {
-        this.EBusinessID = eBusinessID;
-        this.AppKey = appKey;
-        this.ReqURL = reqURL;
+    public OrderTraceRequest(Context context) {
+        this.EBusinessID = context.getString(R.string.ebusiness_id);
+        this.AppKey = context.getString(R.string.app_key);
+        this.ReqURL = context.getString(R.string.req_url);
     }
 
     /**

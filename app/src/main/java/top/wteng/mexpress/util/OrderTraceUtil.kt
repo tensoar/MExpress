@@ -1,9 +1,11 @@
 package top.wteng.mexpress.util
 
+import android.content.Context
+
 class OrderTraceUtil {
     companion object {
-        private val orderTraceRequest = OrderTraceRequest()
-        fun getTraceMap(expCode: String, expNo: String): MutableMap<String, Any> {
+        fun getTraceMap(context: Context, expCode: String, expNo: String): MutableMap<String, Any> {
+            val orderTraceRequest = OrderTraceRequest(context)
             val result = orderTraceRequest.getOrderTracesByJson(expCode, expNo)
             return ExpressApiResultParser.getTraceFromJson(result)
         }

@@ -53,7 +53,7 @@ class ExpressActivity : AppCompatActivity() {
             it.setExpandedTitleColor(Color.RED)
         }
         var expressImage = findViewById<ImageView>(R.id.express_toolbar_image).also {
-            it.setImageResource(R.drawable.bak1)
+            it.setImageResource(R.drawable.bak2)
         }
 
         // 设置列表
@@ -211,7 +211,7 @@ class ExpressActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: String): MutableMap<String, Any> {
             Log.d("task", "expCode = ${params[0]}, expNo = ${params[1]}")
-            return OrderTraceUtil.getTraceMap(params[0], params[1])
+            return OrderTraceUtil.getTraceMap(baseContext ,params[0], params[1])
         }
 
         override fun onPreExecute() {
