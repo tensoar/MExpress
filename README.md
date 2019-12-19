@@ -13,7 +13,7 @@
 
 # 图
 
-![test](https://album.wteng.top/images/2019/08/27/mexpress_main.png)
+![test](https://album.wteng.top/images/2019/08/27/mexpress_main.png){:height="100px" width="400px"}
 
 
 <img src="https://album.wteng.top/images/2019/08/27/mexpress_main.png" alt="mexpress_main.jpg" width="35%" />
